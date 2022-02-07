@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.iot.TemperatureEvent;
 import org.apache.kafka.clients.producer.Producer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,19 +22,13 @@ public class KafkaProducer {
     private KafkaTemplate<Object, Object> kafkaTemplate;
 
     /**
-     * Send an object serialized as JSON to a predefined topic.
+     * Send an event to a predefined topic.
      *
-     * @param object - object to send.
+     * @param event - event to send.
      */
-    public void sendEvent(Object object) {
-        LOGGER.debug("sending event [{}]", object.toString() );
-        kafkaTemplate.send(config.sensorTopic, new Key(), object);
-    }
-
-    @PreDestroy
-    public void destroy()
-    {
-        kafkaTemplate.flush();
+    public void sendTemperatureEvent(TemperatureEvent event) {
+        LOGGER.debug("sending event [{}]", event.toString() );
+        kafkaTemplate.send(config.sensorTopic, new Key(), event);
     }
 
     /**

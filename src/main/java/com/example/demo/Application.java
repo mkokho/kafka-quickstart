@@ -49,7 +49,7 @@ public class Application {
                 var startTime = System.currentTimeMillis();
                 sensors.parallelStream()
                         .map(TemperatureEvent::collect)
-                        .forEach(kafkaProducer::sendEvent);
+                        .forEach(kafkaProducer::sendTemperatureEvent);
                 var endTime = System.currentTimeMillis();
                 LOGGER.info("{}ms elapsed while sending {} mock events", endTime - startTime, sensors.size());
             }, 1, 1, TimeUnit.SECONDS);
