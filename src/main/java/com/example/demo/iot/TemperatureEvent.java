@@ -22,6 +22,10 @@ public class TemperatureEvent {
      */
     private String created;
 
+    private TemperatureEvent() {
+
+    }
+
     public static TemperatureEvent collect(TemperatureSensor sensor)
     {
         var event = new TemperatureEvent();
